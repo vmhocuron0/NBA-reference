@@ -1,6 +1,4 @@
 # NBA-reference
-進度落後中  
-幹  
 　　　　　　 ＿＿  
 　　　　　／＞　　フ  
 　　　　　|  　_　 _ l  
@@ -11,3 +9,5 @@
 　／￣|　　 |　|　|  
 　| (￣ヽ＿_ヽ_)__)  
 　＼二つ  
+  
+remember we all die, nothing to be afraid of  
