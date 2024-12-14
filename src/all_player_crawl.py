@@ -46,15 +46,22 @@ class AllPlayerSpider:
                 data_cells = row.find_elements(By.TAG_NAME, 'td')
 
                 player = header_cells[0].text.strip() if header_cells else ""
-                position = data_cells[2].text.strip() if len(
-                    data_cells) > 0 else ""
-                height = data_cells[3].text.strip() if len(
-                    data_cells) > 1 else ""
-                weight = data_cells[4].text.strip() if len(
-                    data_cells) > 2 else ""
+                
+                # Check if the <strong> tag is present
+                active = "no"
+                if header_cells:
+                    try:
+                        strong_tag = header_cells[0].find_element(By.TAG_NAME, 'strong')
+                        active = "yes"
+                    except:
+                        active = "no"
+
+                position = data_cells[2].text.strip() if len(data_cells) > 2 else ""
+                height = data_cells[3].text.strip() if len(data_cells) > 3 else ""
+                weight = data_cells[4].text.strip() if len(data_cells) > 4 else ""
 
                 if player and position and height and weight:
-                    player_data.append([player, position, height, weight])
+                    player_data.append([player, position, height, weight, active])
             return player_data
         except Exception as e:
             print(f"Error fetching data for letter {letter}: {e}")
@@ -67,7 +74,7 @@ class AllPlayerSpider:
 
         with open(file_path, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
-            writer.writerow(["Player", "Pos", "Ht", "Wt"])  # Write header
+            writer.writerow(["Player", "Pos", "Ht", "Wt", "Active"])  # Write header
             writer.writerows(data)
 
         print(f"Data saved to {file_path}")
@@ -91,6 +98,7 @@ class AllPlayerSpider:
 
         # Write all data to CSV
         self.basic_info_to_csv(output_path, all_player_data)
+
 
     def fetch_career_summary(self, driver, url):
         """

@@ -1,5 +1,5 @@
-from lib.all_player_crawl import AllPlayerSpider
-from lib.csv_combine import CombineCSV
+from src.all_player_crawl import AllPlayerSpider
+from src.csv_combine import CombineCSV
 import pymysql
 
 
